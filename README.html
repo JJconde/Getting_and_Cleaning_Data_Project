@@ -64,9 +64,9 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <h3>Introduction</h3>
 <p>On this project, I simply divide what I’m doing to 4 things:</p>
 <ol style="list-style-type: decimal">
-<li>Reading the data</li>
-<li>Manipulating the data</li>
-<li>Combine the data</li>
+<li>Reading the data<br /></li>
+<li>Manipulating the data<br /></li>
+<li>Combine the data<br /></li>
 <li>Create and Summarize the Combined data</li>
 </ol>
 <p>===</p>
@@ -81,7 +81,8 @@ names(activity) &lt;- c(&quot;activity_id&quot;, &quot;activity&quot;)</code></p
 <pre class="{r}"><code># Read the features, and only select the second column
 features &lt;- read.csv(&quot;UCI HAR Dataset/features.txt&quot;, header=FALSE, sep=&quot; &quot;, colClasses=&quot;character&quot;)
 features &lt;- features[, 2]</code></pre>
-<p>Third, we also need the <strong>subject</strong>, and on the following code, I’ll be combining both train and test dataset using <code>rbind</code>.<br />I like to remove the previous datasets when I combine both train and test to free up my memory and have less things to worry about.</p>
+<p>Third, we also need the <strong>subject</strong>, and on the following code, I’ll be combining both train and test dataset using <code>rbind</code>.</p>
+<p>I like to remove the previous datasets when I combine both train and test to free up my memory and have less things to worry about.</p>
 <pre class="{r}"><code># Read the subject and combine the train and test dataset
 subject_train &lt;- read.csv(&quot;UCI HAR Dataset/train/subject_train.txt&quot;, header=FALSE, sep=&quot; &quot;)
 subject_test &lt;- read.csv(&quot;UCI HAR Dataset/test/subject_test.txt&quot;, header=FALSE, sep=&quot; &quot;)
@@ -94,7 +95,8 @@ activity_train &lt;- read.csv(&quot;UCI HAR Dataset/train/y_train.txt&quot;, hea
 activity_test &lt;- read.csv(&quot;UCI HAR Dataset/test/y_test.txt&quot;, header=FALSE, sep=&quot; &quot;)
 activity_id &lt;- rbind(activity_train, activity_test)
 rm(list=c(&quot;activity_train&quot;, &quot;activity_test&quot;))</code></pre>
-<p>Fifth, this is the main dataset that we’ll need. Using the <code>read.table</code> this time to make it faster to read.<br />Also, I like to convert the dataset back to <code>data.frame</code> because <code>data.table</code> has some different subsetting features that I don’t want.</p>
+<p>Fifth, this is the main dataset that we’ll need. Using the <code>read.table</code> this time to make it faster to read.</p>
+<p>Also, I like to convert the dataset back to <code>data.frame</code> because <code>data.table</code> has some different subsetting features that I don’t want.</p>
 <pre class="{r}"><code># Read all the measureable observation from train and test dataset
 X_train &lt;- read.table(&quot;UCI HAR Dataset/train/X_train.txt&quot;, header=FALSE)
 X_test &lt;- read.table(&quot;UCI HAR Dataset/test/X_test.txt&quot;, header=FALSE)
@@ -106,7 +108,8 @@ rm(list=c(&quot;X_train&quot;, &quot;X_test&quot;))</code></pre>
 </div>
 <div id="manipulating-the-data" class="section level3">
 <h3>Manipulating the data</h3>
-<p>Overall, I simply use the features dataset to name the main data that we care about.<br />Afterwards, I selected the column names with <code>mean</code> and <code>std</code> in them.</p>
+<p>Overall, I simply use the features dataset to name the main data that we care about.</p>
+<p>Afterwards, I selected the column names with <code>mean</code> and <code>std</code> in them.</p>
 <pre class="{r}"><code># Input the feature names
 names(X) &lt;- features
 
@@ -123,7 +126,8 @@ tidy_dataset &lt;- subset(X, select=selected_features)</code></pre>
 <pre class="{r}"><code># Combine the activity and subject to the new dataset
 tidy_dataset$activity_id &lt;- activity_id$V1 # +1 only select the vector, not the data.frame
 tidy_dataset$subject &lt;- subject$V1</code></pre>
-<p>Second, I <code>merged</code> the main dataset and the activity dataset using the <strong>activity_id</strong> for the join.<br />Afterwards, I simply removed the activity_id to make it easier later to summarize the values.</p>
+<p>Second, I <code>merged</code> the main dataset and the activity dataset using the <strong>activity_id</strong> for the join.</p>
+<p>Afterwards, I simply removed the activity_id to make it easier later to summarize the values.</p>
 <pre class="{r}"><code>tidy_dataset &lt;- merge(tidy_dataset, activity)
 
 # Get rid of the activity_id
@@ -132,14 +136,16 @@ tidy_dataset$activity_id &lt;- NULL </code></pre>
 </div>
 <div id="create-and-summarize-the-combined-data" class="section level3">
 <h3>Create and Summarize the Combined data</h3>
-<p>First, I wanted to make it easier to work it by converting the dataset to <code>data.table</code>.<br />Aftewards, using the built-in capability of <code>data.table</code>, I simply used <code>lapply</code> to take the <em>average</em> by <strong>subject</strong> and <strong>activity</strong>.</p>
+<p>First, I wanted to make it easier to work it by converting the dataset to <code>data.table</code>.</p>
+<p>Aftewards, using the built-in capability of <code>data.table</code>, I simply used <code>lapply</code> to take the <em>average</em> by <strong>subject</strong> and <strong>activity</strong>.</p>
 <pre class="{r}"><code># Create a second dataset for the average of each variable for each activity and subject
 tidy_dataset &lt;- data.table(tidy_dataset)
 avg_tidy_dataset &lt;- tidy_dataset[, lapply(.SD, mean), by=c(&quot;subject&quot;, &quot;activity&quot;)]</code></pre>
 <p>Second, this will write the newly created dataset to a txt file in the working directory.</p>
 <pre class="{r}"><code># Write the table to a file
 write.table(avg_tidy_dataset, file=&quot;tidy_dataset.txt&quot;, row.name=FALSE)</code></pre>
-<p>We all know that it is sometimes harder to read the txt file as it depends on several things.<br />I’ve created a code below as an example on how to read the file I created from above. This will make it easier to work with later on.</p>
+<p>We all know that it is sometimes harder to read the txt file as it depends on several things.</p>
+<p>I’ve created a code below as an example on how to read the file I created from above. This will make it easier to work with later on.</p>
 <pre class="{r}"><code># How to read the table back to double check etc.
 dt &lt;- read.table(&quot;tidy_dataset.txt&quot;, header=TRUE)</code></pre>
 </div>

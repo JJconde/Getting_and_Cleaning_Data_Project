@@ -10,10 +10,10 @@ date: "Thursday, September 18, 2014"
 
 On this project, I simply divide what I'm doing to 4 things:
 
-1) Reading the data
-2) Manipulating the data
-3) Combine the data
-4) Create and Summarize the Combined data
+1) Reading the data  
+2) Manipulating the data  
+3) Combine the data  
+4) Create and Summarize the Combined data  
 
 ===
 
@@ -36,6 +36,7 @@ features <- features[, 2]
 ```
 
 Third, we also need the **subject**, and on the following code, I'll be combining both train and test dataset using `rbind`.  
+
 I like to remove the previous datasets when I combine both train and test to free up my memory and have less things to worry about.
 
 ```{r}
@@ -59,6 +60,7 @@ rm(list=c("activity_train", "activity_test"))
 ```
 
 Fifth, this is the main dataset that we'll need. Using the `read.table` this time to make it faster to read.  
+
 Also, I like to convert the dataset back to `data.frame` because `data.table` has some different subsetting features that I don't want.
 
 ```{r}
@@ -75,6 +77,7 @@ rm(list=c("X_train", "X_test"))
 ### Manipulating the data
 
 Overall, I simply use the features dataset to name the main data that we care about.  
+
 Afterwards, I selected the column names with `mean` and `std` in them.
 
 ```{r}
@@ -100,6 +103,7 @@ tidy_dataset$subject <- subject$V1
 ```
 
 Second, I `merged` the main dataset and the activity dataset using the **activity_id** for the join.  
+
 Afterwards, I simply removed the activity_id to make it easier later to summarize the values.
 
 ```{r}
@@ -113,6 +117,7 @@ tidy_dataset$activity_id <- NULL
 ### Create and Summarize the Combined data
 
 First, I wanted to make it easier to work it by converting the dataset to `data.table`.  
+
 Aftewards, using the built-in capability of `data.table`, I simply used `lapply` to take the *average* by **subject** and **activity**.
 
 ```{r}
@@ -129,6 +134,7 @@ write.table(avg_tidy_dataset, file="tidy_dataset.txt", row.name=FALSE)
 ```
 
 We all know that it is sometimes harder to read the txt file as it depends on several things.  
+
 I've created a code below as an example on how to read the file I created from above. This will make it easier to work with later on.
 
 ```{r}
