@@ -9,7 +9,7 @@ date: "Thursday, September 18, 2014"
 
 **SUBJECT**  
 This is the person who did the activity.  
-**Range**: (1, 30)
+**Range**: [1, 30]
                 
 **ACTIVITY**  
 This is the kind of activity the subject did. It is also what we're trying to measure on all the other columns.  
@@ -25,4 +25,4 @@ These are the measurements of the activity. They were taken by getting the avera
 **Note:** I did not change the name of all the columns here. Make sure you remember that each one is an average of the mean or standard deviation.
 
 I am not fairly familiar with each one, so I will leave this mainly blank.  
-**Range:** (-0.9976661, 0.9745087)
+**Range:** [-1, 1]
