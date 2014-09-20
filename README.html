@@ -64,15 +64,15 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <h3>Introduction</h3>
 <p>On this project, I simply divide what I’m doing to 4 things:</p>
 <ol style="list-style-type: decimal">
-<li>Reading the data<br /></li>
-<li>Manipulating the data<br /></li>
+<li>Read the data<br /></li>
+<li>Manipulate the data<br /></li>
 <li>Combine the data<br /></li>
 <li>Create and Summarize the Combined data</li>
 </ol>
 <p>===</p>
 </div>
-<div id="reading-the-data" class="section level3">
-<h3>Reading the data</h3>
+<div id="read-the-data" class="section level3">
+<h3>Read the data</h3>
 <p>First, I simply read the activity list which contains the <strong>ID</strong> and the <strong>name</strong>.</p>
 <pre class="{r}"><code># Read the activity list and rename the column names
 activity &lt;- read.csv(&quot;UCI HAR Dataset/activity_labels.txt&quot;, header=FALSE, sep=&quot; &quot;)
@@ -89,7 +89,7 @@ subject_test &lt;- read.csv(&quot;UCI HAR Dataset/test/subject_test.txt&quot;, h
 subject &lt;- rbind(subject_train, subject_test)
 rm(list=c(&quot;subject_train&quot;, &quot;subject_test&quot;))</code></pre>
 <p>Fourth, using a similar script as subject, this will read the <strong>activity_id</strong> which we’ll need later on.</p>
-<p><strong>Note:</strong> I will be using this later to convert the ID to the activity name</p>
+<p><strong>Note:</strong> I will be using this later to convert the ID to the activity name.</p>
 <pre class="{r}"><code># Read the activity ids for all the observation from train and test dataset
 activity_train &lt;- read.csv(&quot;UCI HAR Dataset/train/y_train.txt&quot;, header=FALSE, sep=&quot; &quot;)
 activity_test &lt;- read.csv(&quot;UCI HAR Dataset/test/y_test.txt&quot;, header=FALSE, sep=&quot; &quot;)
@@ -106,8 +106,8 @@ X &lt;- rbind(X_train, X_test)
 rm(list=c(&quot;X_train&quot;, &quot;X_test&quot;))</code></pre>
 <p>===</p>
 </div>
-<div id="manipulating-the-data" class="section level3">
-<h3>Manipulating the data</h3>
+<div id="manipulate-the-data" class="section level3">
+<h3>Manipulate the data</h3>
 <p>Overall, I simply use the features dataset to name the main data that we care about.</p>
 <p>Afterwards, I selected the column names with <code>mean</code> and <code>std</code> in them.</p>
 <pre class="{r}"><code># Input the feature names

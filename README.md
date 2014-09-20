@@ -10,14 +10,14 @@ date: "Thursday, September 18, 2014"
 
 On this project, I simply divide what I'm doing to 4 things:
 
-1) Reading the data  
-2) Manipulating the data  
+1) Read the data  
+2) Manipulate the data  
 3) Combine the data  
 4) Create and Summarize the Combined data  
 
 ===
 
-### Reading the data
+### Read the data
 
 First, I simply read the activity list which contains the **ID** and the **name**.
 
@@ -49,7 +49,7 @@ rm(list=c("subject_train", "subject_test"))
 
 Fourth, using a similar script as subject, this will read the **activity_id** which we'll need later on.
 
-**Note:** I will be using this later to convert the ID to the activity name
+**Note:** I will be using this later to convert the ID to the activity name.
 
 ```{r}
 # Read the activity ids for all the observation from train and test dataset
@@ -74,11 +74,11 @@ rm(list=c("X_train", "X_test"))
 ```
 ===
 
-### Manipulating the data
+### Manipulate the data
 
 Overall, I simply use the features dataset to name the main data that we care about.  
 
-Afterwards, I selected the column names with `mean` and `std` in them.
+Afterwards, I selected the column names with **mean** and **std** in them using `grepl` and `subset`.
 
 ```{r}
 # Input the feature names
@@ -104,7 +104,7 @@ tidy_dataset$subject <- subject$V1
 
 Second, I `merged` the main dataset and the activity dataset using the **activity_id** for the join.  
 
-Afterwards, I simply removed the activity_id to make it easier later to summarize the values.
+Afterwards, I simply removed the **activity_id** to make it easier later to summarize the values.
 
 ```{r}
 tidy_dataset <- merge(tidy_dataset, activity)
