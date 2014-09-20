@@ -8,6 +8,11 @@ date: "Thursday, September 18, 2014"
 
 ### Introduction
 
+The goal is to prepare tidy data that can be used for later analysis using the **UCI HAR Dataset**.
+
+A full description is available here:  
+[Human Activity Recognition](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+
 On this project, I simply divide what I'm doing to 4 things:
 
 1) Read the data  
